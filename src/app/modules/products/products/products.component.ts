@@ -24,6 +24,11 @@ export class ProductsComponent implements OnInit {
     this.resolveSelection(ALL, true);
   }
 
+  /**
+   * open product details dialog
+   *
+   * @return void
+   * */
   openDialog(data: any): void {
     this.dialog.open(InfoDisplaying, {
       width: '700px',
@@ -35,16 +40,32 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * select new data when use type something
+   *
+   * @return void
+   *
+   * */
   search(string: any) {
     return this.resolveSelection(SEARCH(string));
   }
 
+  /**
+   * select new data depending on select variable
+   *
+   * @return void
+   *
+   * */
   private resolveSelection(selection: any, all = false) {
-    this.items$ = this.productStore.select(selection).pipe(this.resolveIncomingData(all), map((data) => {
-      return data;
-    }))
+    this.items$ = this.productStore.select(selection).pipe(this.resolveIncomingData(all))
   }
 
+  /**
+   * map these data to check data count
+   *
+   * @return void
+   *
+   * */
   resolveIncomingData(all = false) {
     return map((data: Array<any>) => {
       this.allCount = all ? data.length : this.allCount;
