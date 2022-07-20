@@ -1,3 +1,3 @@
 export {
-  ProductsModule
-} from './products.module';
+  StoreModule
+} from './store.module';

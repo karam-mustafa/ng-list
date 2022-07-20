@@ -7,14 +7,18 @@ import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import {RootStoreModule} from "./core/ngrx/root-store/root-store.module";
-import {ProductsModule} from "./modules/products/store";
+import {ProductsModule} from "./modules/products/products.module";
 import {ProductsComponent} from "./modules/products/products/products.component";
-import {MatButton} from "@angular/material/button";
+import {UsedUIComponents} from "./modules/shared/imports/UsedUIComponents";
+import {SharedModule} from "./modules/shared/shared.module";
+import { HomeComponent } from './modules/home/home/home.component';
+import {HomeModule} from "./modules/home/home.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductsComponent
+    ProductsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,9 @@ import {MatButton} from "@angular/material/button";
     EffectsModule.forRoot([]),
     RootStoreModule,
     ProductsModule,
-
+    SharedModule,
+    UsedUIComponents,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

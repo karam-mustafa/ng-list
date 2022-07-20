@@ -8,9 +8,9 @@ import { reducer } from './reducer';
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature('store1', reducer),
-    EffectsModule.forFeature([ProductEffects])
+    StoreModule.forFeature('products', reducer),
+    EffectsModule.forFeature([ProductEffects]),
   ],
   providers: [ProductEffects]
 })
-export class ProductsModule { }
+export class ProductStoreModule { }

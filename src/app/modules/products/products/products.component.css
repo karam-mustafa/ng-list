@@ -1,0 +1,25 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.products-area{
+  max-width: 800px;
+  padding: 20px;
+}
+
+.product-card{
+  width: 90%;
+  height: max-content;
+  margin: auto;
+}
+.search-input-form {
+  width: 100%;
+}
+
+.search-input-full-width {
+  width: 100%;
+}
+.card-image{
+  max-height: 400px;
+  min-height: 400px;
+  height: max-content;
+  width: 100%;
+  margin: auto;
+}

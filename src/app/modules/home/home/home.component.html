@@ -1,0 +1,61 @@
+<div class="container">
+  <div>
+    <h1>About the task</h1>
+    <hr>
+    <p>
+      The goal from this task is obtaining searchable list from Mock Api,
+      that makes you able to see the resources and search on these resources whatever they will be,
+      this task was developed using angular framework (version 14), and I made it in a few hours
+    </p>
+  </div>
+  <div>
+    <h1>Project structure and architecture</h1>
+    <hr>
+    <br>
+    <p>
+      The main layer that controls in the application is NgRx Package,
+      I used Store, Select, Effect packages to manage fetching the products and searching on them,
+      I also used Material UI for the Front UI
+    </p>
+    <p>
+      This project was developed to handle large and distributed projects, by providing modules concepts
+      and makes you able to develop each feature as a module.
+    </p>
+  </div>
+  <br>
+  <hr>
+  <div>
+    <h1>Project Module Architecture</h1>
+    <p>
+      Each module will contains:
+    </p>
+    <ul>
+      <li>
+        <b>main folder:</b> basically it is angular component it self, and the name of this folder like the module name
+      </li>
+      <li>
+        <b>store folder</b>: this folder contains all state management dependencies, like (reducer, actions, effects,
+        index, and selectors)
+      </li>
+      <li>
+        <b>services folder</b>: this folder contains all required services that this module is depending on
+      </li>
+      <li>
+        <b>tests folder</b>: this folder contains all required unit test
+      </li>
+      <li>
+        <b>models folder</b>: contains all model interfaces for data types
+      </li>
+      <li>
+        <b>module ts file</b>: contains all imports and export for this module
+      </li>
+      <li>
+        <b>route ts file</b>: contains all routes
+      </li>
+    </ul>
+    And you can see that the products module contains all the above folders and files,
+    on the top of that, there is shared module
+    and this module will contains all the shared component, reusable providers, reusable assets and components,
+    imports and exports.
+  </div>
+</div>
