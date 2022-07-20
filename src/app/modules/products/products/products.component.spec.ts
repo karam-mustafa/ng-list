@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, tick} from '@angular/core/testing';
 
 import {ProductsComponent} from './products.component';
 import {HttpClient} from "@angular/common/http";
@@ -15,6 +15,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angula
 import {Overlay} from "@angular/cdk/overlay";
 import {ALL} from "../store/selectors";
 import {BehaviorSubject} from "rxjs/dist/types";
+import {By} from "@angular/platform-browser";
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
@@ -83,4 +84,20 @@ describe('ProductsComponent', () => {
     console.log(compiled)
     expect(compiled.querySelector('.card-title')?.textContent).toContain('mens');
   });
+
+  it('should change search input', () => {
+    setInputValue('.search-input', 'mens');
+
+  });
+
+
+  function setInputValue(selector: string, value: string) {
+    fixture.detectChanges();
+    tick();
+    let input = fixture.debugElement.query(By.css(selector)).nativeElement;
+    input.value = value;
+    input.dispatchEvent(new Event('input'));
+    tick();
+  }
+
 });
