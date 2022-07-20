@@ -16,7 +16,6 @@ export class ProductsComponent implements OnInit {
   items$: any;
   allCount: number = 0;
   currentCount: number = 0;
-  otherPipes: any;
 
   constructor(private productStore: Store<ProductState>, public dialog: MatDialog) {
     this.productStore.dispatch(new StoreActions.GetItems());
