@@ -5,55 +5,55 @@ import {HttpClient} from "@angular/common/http";
 import {
   ActionsSubject,
   ReducerManager,
-  ReducerManagerDispatcher,
+  ReducerManagerDispatcher, select,
   StateObservable,
   Store,
   StoreModule
 } from "@ngrx/store";
 import {provideMockStore} from "@ngrx/store/testing";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {Overlay, OverlayModule} from "@angular/cdk/overlay";
-import {MAT_SELECT_SCROLL_STRATEGY_PROVIDER} from "@angular/material/select";
-import {MAT_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER} from "@angular/material/tooltip";
-import {MAT_AUTOCOMPLETE_SCROLL_STRATEGY} from "@angular/material/autocomplete";
+import {Overlay} from "@angular/cdk/overlay";
+import {ALL} from "../store/selectors";
+import {BehaviorSubject} from "rxjs/dist/types";
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
   let fixture: ComponentFixture<ProductsComponent>;
 
-  beforeEach(async () => {
+  const mockedValue = [
+    {
+      id: 1,
+      title: 1,
+      image: 1,
+      description: 1,
+      category: 1,
+    }
+  ];
+
+  const storeSubjectMock = new BehaviorSubject(mockedValue);
+  const mockedStore = {
+    pipe: () => storeSubjectMock.asObservable(),
+  };
+
+  let t = beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductsComponent],
+      imports: [
+        MatDialogModule,
+      ],
       providers: [HttpClient,
-        Store,
+        {provide: Store, useValue: mockedStore},
         StateObservable,
         ActionsSubject,
         ReducerManager,
         ReducerManagerDispatcher,
         provideMockStore({}),
-        MatDialogModule,
         MatDialog,
-        {
-          provide: MAT_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
-          deps: [Overlay],
-        },{
-          provide: MAT_SELECT_SCROLL_STRATEGY_PROVIDER,
-          deps: [Overlay],
-        },
         Overlay,
+
         {provide: MatDialogRef, useValue: {}},
         {
-          provide: MAT_DIALOG_DATA, useValue: {
-            myData: {
-              id: 1,
-              title: 'any',
-              description: 'any'
-            }
-          }
-        },
-        {
-          provide: MAT_AUTOCOMPLETE_SCROLL_STRATEGY,
-          deps: [Overlay],
+          provide: MAT_DIALOG_DATA, useValue: {}
         },
       ]
     })
@@ -68,10 +68,19 @@ describe('ProductsComponent', () => {
     expect(component).toBeTruthy();
   });
 
+
+  it('should return an unaltered value', () => {
+    t.variableReferencingStore
+      .pipe(select(ALL))
+      .subscribe((val: any) => expect(val).toBe(mockedValue))
+  });
+
+
   it('should render products', () => {
     const fixture = TestBed.createComponent(ProductsComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.card-title')?.textContent).toContain('Mete');
+    console.log(compiled)
+    expect(compiled.querySelector('.card-title')?.textContent).toContain('mens');
   });
 });
